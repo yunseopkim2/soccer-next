@@ -1,0 +1,14 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.li {
+    display: block;
+    background-color: aquamarine;
+    margin-left: 180px;
+}
+.table {
+    width:100%
+}
