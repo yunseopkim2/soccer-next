@@ -1,8 +1,8 @@
 import React,{useState} from 'react'
 import { useDispatch } from 'react-redux';
 import { userActions } from '../../redux/reducers/userReducer.ts';
-import tableStyles from '../../styles/Table.module.css'
-export default function  Join(){
+import tableStyles from '../styles/table.module.css'
+export default function  UpdUser(){
     const [user, setUser] =useState({
         userid:'', password:'', email:'', name:'', phone:'', birth:'', address:''
     })
@@ -28,7 +28,7 @@ export default function  Join(){
         <table className={tableStyles.table}>
             <thead>
                 <tr>
-                    <th colSpan={2}><h1>회원가입</h1></th>
+                    <th colSpan={2}><h1>정보수정</h1></th>
                 </tr>
             </thead>
             <tbody>
@@ -64,7 +64,7 @@ export default function  Join(){
                     <td><input type="text" name='address' onChange={handleChange}/></td>
                 </tr>
                 <tr>
-                    <td colSpan={2}><button type="submit" onClick={handleClick}>회원가입</button><br /></td>
+                    <td colSpan={2}><button type="submit" onClick={handleClick}>수정</button><br /></td>
                 </tr>
             </tbody>
         </table>

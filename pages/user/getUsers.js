@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import tableStyles from '../common/styles/table.module.css'
+import tableStyles from '../styles/table.module.css'
 import Link from 'next/link'
 
-export default function GetUsers(){
+export default function UserList(){
 
     const columns = ["사용자ID", "이름", "이메일", "전화번호", "생년월일", "주소"];
     const [data, setData] = useState([])
     useEffect(()=>{
-      axios.get('http://localhost:5000/api/user/getUsers').then(res=>{
+      axios.get('http://localhost:5000/api/user/list').then(res=>{
         setData(res.data.users)
       }).catch(err=>{})
     },[])

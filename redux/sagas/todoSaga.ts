@@ -26,6 +26,6 @@ function* Todojoin(todo: TodoJoinType){
 }
 
 
-export function* watchAdd(){
+export function* watchAddTodo(){
     yield takeLatest(todoActions.addRequest, Todojoin)
 }
