@@ -5,7 +5,8 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-
+import { styled } from '@mui/material/styles';
+import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
@@ -14,6 +15,8 @@ import Router from "next/router";
 
 import Link from "next/link";
 import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import ButtonGroup from '@mui/material/ButtonGroup';
 import Menu from '@mui/material/Menu';
 import tableStyles from "@/styles/Table.module.css"
 import MenuItem from '@mui/material/MenuItem';
@@ -27,7 +30,40 @@ const HomeIcon = createSvgIcon(
 const pages = ['카운터', '계산기', 'BMI', '게시판'];
 const preSettings = ['회원가입', '로그인'];
 const postSettings = ['프로필', '로그아웃', '회원정보수정', '회원탈퇴'];
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    backgroundColor: '#44b700',
+    color: '#44b700',
+    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    '&::after': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      borderRadius: '50%',
+      animation: 'ripple 1.2s infinite ease-in-out',
+      border: '1px solid currentColor',
+      content: '""',
+    },
+  },
+  '@keyframes ripple': {
+    '0%': {
+      transform: 'scale(.8)',
+      opacity: 1,
+    },
+    '100%': {
+      transform: 'scale(2.4)',
+      opacity: 0,
+    },
+  },
+}));
 
+const SmallAvatar = styled(Avatar)(({ theme }) => ({
+  width: 22,
+  height: 22,
+  border: `2px solid ${theme.palette.background.paper}`,
+}));
 
 export function Nav(){
   const [userUrls, setUserUrls] = useState([])
@@ -105,7 +141,7 @@ export function Nav(){
   }
 
   return (
-   <AppBar position="static" >
+   <AppBar position="static" style={{marginBottom:"30px"}} >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -128,9 +164,9 @@ export function Nav(){
             </Box>
                       </Typography>
 
-          
+          <ButtonGroup variant="contained" aria-label="outlined primary button group">
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={()=>handleClick(page)}
@@ -140,18 +176,28 @@ export function Nav(){
               </Button>
               
             ))}
-          </Box>
+            </Box>
+            </ButtonGroup>
           <Box sx={{ flexGrow: 0}}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAOx3ICIIaQaKmfxlhiZNU2lh7ST07Hxmjsw&usqp=CAU" />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper.png" />
-              </IconButton>
-            </Tooltip>
+            <Stack direction="row" spacing={2}>
+      <StyledBadge
+        overlap="circular"
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        variant="dot"
+              >
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+        <Avatar alt="Remy Sharp" src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper.png" />
+      </IconButton>
+              </StyledBadge>
+      <Badge
+        overlap="circular"
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+              >
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+        <Avatar alt="Travis Howard" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAOx3ICIIaQaKmfxlhiZNU2lh7ST07Hxmjsw&usqp=CAU" />
+      </IconButton>
+              </Badge>
+    </Stack>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -177,6 +223,7 @@ export function Nav(){
         </Toolbar>
       </Container>
     </AppBar>
+    
   );
 }
 const SubMenu = (props) => {
